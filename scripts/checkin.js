@@ -51,20 +51,14 @@ async function hacerCheckin() {
       return;
     }
 
-    if (data.yaRegistrado) {
-        document.getElementById('ya-nombre').textContent = data.nombre;
-        document.getElementById('ya-hora').textContent   = data.horaAnterior;
-        document.getElementById('w-cedula').textContent    = data.cedula;
-        document.getElementById('w-categoria').textContent = data.categoria || '—';
-        mostrarScreen('screen-ya');
-        return;
-    }
-
-    // Éxito
+    // Mismo display para primer ingreso y reingresos.
+    // Si ya registró antes, muestra la hora original de entrada.
     document.getElementById('w-nombre').textContent    = data.nombre;
     document.getElementById('w-cedula').textContent    = data.cedula;
     document.getElementById('w-categoria').textContent = data.categoria;
-    document.getElementById('w-hora').textContent      = data.horaCheckin;
+    document.getElementById('w-hora').textContent      = data.yaRegistrado
+      ? data.horaAnterior
+      : data.horaCheckin;
     document.getElementById('w-sub').textContent       = '¡Bienvenido/a a la Jornada!';
 
     // Asiento
