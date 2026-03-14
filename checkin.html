@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+    III Jornada Oriental de Urología Pediátrica – Check-in
+    Autor  : Julian Briceño
+    Versión: 2.0.0
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-in · III Jornada Oriental de Urología Pediátrica</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="img/logo/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/checkin.css">
+</head>
+<body class="checkin-body">
+
+  <!-- BRAND -->
+  <div class="checkin-brand">
+    <div class="checkin-brand__ring" aria-hidden="true">
+      <img src="img/logo/logo.png" alt="Logo" style="width:32px;height:32px;object-fit:contain;">
+    </div>
+    <h1 class="checkin-brand__name">III Jornada Oriental de Urología Pediátrica</h1>
+  </div>
+
+  <!-- CARD -->
+  <div class="checkin-card" role="main">
+
+    <!-- PANTALLA: LOGIN -->
+    <div class="checkin-screen checkin-screen--active" id="screen-login">
+      <h2 class="checkin-card__title">Bienvenido a la<br><em>Jornada</em></h2>
+      <p class="checkin-card__sub">Ingresa tu número de cédula para registrar tu asistencia.</p>
+
+      <div class="checkin-field">
+        <label class="checkin-label" for="cedula-input">Número de cédula</label>
+        <input
+          class="checkin-input"
+          type="text"
+          id="cedula-input"
+          placeholder="Ej: 19895266"
+          inputmode="numeric"
+          autocomplete="off"
+          autofocus
+          aria-label="Número de cédula"
+        >
+      </div>
+
+      <button class="checkin-btn-primary" id="btn-checkin" onclick="hacerCheckin()">
+        Registrar asistencia →
+      </button>
+
+      <div class="checkin-msg-error" id="msg-error" role="alert"></div>
+    </div>
+
+    <!-- PANTALLA: BIENVENIDA -->
+    <div class="checkin-screen" id="screen-bienvenida">
+      <div class="checkin-welcome__icon" aria-hidden="true">🎓</div>
+      <p class="checkin-welcome__congreso">III Jornada Oriental de Urología Pediátrica</p>
+      <h3 class="checkin-welcome__nombre" id="w-nombre">—</h3>
+      <p class="checkin-welcome__sub" id="w-sub">—</p>
+
+      <div class="checkin-info-grid">
+        <div class="checkin-info-row">
+          <span class="checkin-info-row__icon" aria-hidden="true">🪪</span>
+          <div class="checkin-info-row__data">
+            <span class="checkin-info-row__label">Cédula</span>
+            <span class="checkin-info-row__value" id="w-cedula">—</span>
+          </div>
+        </div>
+        <div class="checkin-info-row">
+          <span class="checkin-info-row__icon" aria-hidden="true">🎓</span>
+          <div class="checkin-info-row__data">
+            <span class="checkin-info-row__label">Categoría</span>
+            <span class="checkin-info-row__value" id="w-categoria">—</span>
+          </div>
+        </div>
+        <div class="checkin-info-row" id="w-asiento-row">
+          <span class="checkin-info-row__icon" aria-hidden="true">🪑</span>
+          <div class="checkin-info-row__data">
+            <span class="checkin-info-row__label">Asiento asignado</span>
+            <span class="checkin-info-row__value" id="w-asiento">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkin-stamp">
+        <strong id="w-hora">—</strong>
+        Check-in registrado
+      </div>
+
+      <button class="checkin-btn-secondary" onclick="resetear()">
+        ← Registrar otra persona
+      </button>
+    </div>
+
+    <!-- PANTALLA: YA REGISTRADO -->
+    <div class="checkin-screen" id="screen-ya">
+      <div class="checkin-ya__icon" aria-hidden="true">⚠️</div>
+      <h3 class="checkin-welcome__nombre" id="ya-nombre">—</h3>
+      <p class="checkin-ya__msg">Esta persona ya registró su asistencia anteriormente.</p>
+
+      <div class="checkin-info-row" style="margin-bottom:12px;">
+        <span class="checkin-info-row__icon" aria-hidden="true">🕐</span>
+        <div class="checkin-info-row__data">
+          <span class="checkin-info-row__label">Hora de entrada registrada</span>
+          <span class="checkin-info-row__value checkin-info-row__value--gold" id="ya-hora">—</span>
+        </div>
+      </div>
+
+      <button class="checkin-btn-secondary" style="margin-top:12px;" onclick="resetear()">
+        ← Registrar otra persona
+      </button>
+    </div>
+
+  </div><!-- /checkin-card -->
+
+  <!-- Loading overlay -->
+  <div class="checkin-overlay" id="overlay" aria-hidden="true">
+    <div class="checkin-overlay__spinner"></div>
+  </div>
+
+  <script src="scripts/checkin.js" defer></script>
+</body>
+</html>

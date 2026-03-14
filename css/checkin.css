@@ -1,0 +1,373 @@
+/* ============================================================
+   checkin.css — página de check-in de asistencia
+   Depende de styles.css para variables y reset.
+   ============================================================ */
+
+/* ── Body especial: centrado vertical, fondo oscuro ── */
+.checkin-body {
+  min-height      : 100vh;
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  justify-content : center;
+  padding         : 24px 16px;
+  position        : relative;
+  overflow        : hidden;
+  background      : var(--color-bg-darkest);
+}
+
+/* ── Brand ── */
+.checkin-brand {
+  text-align   : center;
+  margin-bottom: 32px;
+  animation    : anim-fade-up 0.6s ease both;
+}
+
+.checkin-brand__ring {
+  width        : 72px;
+  height       : 72px;
+  border       : 1.5px solid var(--color-border);
+  border-radius: 50%;
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  margin       : 0 auto 14px;
+  background   : rgba(201,168,76,0.06);
+}
+
+.checkin-brand__name {
+  font-family   : var(--font-serif);
+  font-size     : 12px;
+  font-weight   : 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+}
+
+/* ── Card ── */
+.checkin-card {
+  width        : 100%;
+  max-width    : 420px;
+  background   : rgba(255,255,255,0.03);
+  border       : 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding      : 36px 32px;
+  animation    : anim-fade-up 0.7s 0.15s ease both;
+  position     : relative;
+  z-index      : 1;
+}
+
+/* ── Pantallas ── */
+.checkin-screen          { display: none; }
+.checkin-screen--active  { display: block; }
+
+/* ── Títulos de la card ── */
+.checkin-card__title {
+  font-family  : var(--font-serif);
+  font-size    : 30px;
+  font-weight  : 300;
+  color        : var(--color-white);
+  margin-bottom: 6px;
+  line-height  : 1.15;
+}
+
+.checkin-card__title em { font-style: italic; color: var(--color-gold); }
+
+.checkin-card__sub {
+  font-size    : 13px;
+  color        : var(--color-muted);
+  margin-bottom: 32px;
+  line-height  : 1.6;
+}
+
+/* ── Campo de cédula ── */
+.checkin-field { margin-bottom: 16px; }
+
+.checkin-label {
+  display       : block;
+  font-size     : 10px;
+  font-weight   : 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+  margin-bottom : 8px;
+}
+
+.checkin-input {
+  width        : 100%;
+  background   : rgba(255,255,255,0.05);
+  border       : 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding      : 16px 20px;
+  font-size    : 22px;
+  font-family  : var(--font-serif);
+  font-weight  : 400;
+  color        : var(--color-white);
+  outline      : none;
+  letter-spacing: 0.08em;
+  transition   : all var(--transition-fast);
+  -webkit-appearance: none;
+}
+
+.checkin-input::placeholder { color: rgba(138,154,181,0.3); font-size: 16px; }
+
+.checkin-input:focus {
+  border-color: var(--color-border);
+  background  : rgba(255,255,255,0.08);
+  box-shadow  : 0 0 0 4px rgba(201,168,76,0.1);
+}
+
+.checkin-input--error { border-color: rgba(224,92,92,0.6); }
+
+/* ── Botón principal ── */
+.checkin-btn-primary {
+  width          : 100%;
+  background     : linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  color          : var(--color-bg-darkest);
+  border         : none;
+  border-radius  : var(--radius-sm);
+  padding        : 16px;
+  font-family    : var(--font-sans);
+  font-size      : 14px;
+  font-weight    : 600;
+  letter-spacing : 0.08em;
+  text-transform : uppercase;
+  cursor         : pointer;
+  transition     : all var(--transition-fast);
+  margin-top     : 8px;
+  box-shadow     : 0 6px 24px rgba(201,168,76,0.25);
+}
+
+.checkin-btn-primary:hover:not(:disabled) {
+  transform : translateY(-2px);
+  box-shadow: 0 10px 32px rgba(201,168,76,0.4);
+}
+
+.checkin-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Spinner inline ── */
+.checkin-spinner-inline {
+  display       : inline-block;
+  width         : 16px;
+  height        : 16px;
+  border        : 2px solid rgba(6,14,28,0.25);
+  border-top-color: var(--color-bg-darkest);
+  border-radius : 50%;
+  animation     : checkin-spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right  : 8px;
+}
+
+@keyframes checkin-spin { to { transform: rotate(360deg); } }
+
+/* ── Mensaje de error ── */
+.checkin-msg-error {
+  background   : rgba(224,92,92,0.1);
+  border       : 1px solid rgba(224,92,92,0.25);
+  border-radius: var(--radius-sm);
+  padding      : 12px 16px;
+  font-size    : 13px;
+  color        : #fca5a5;
+  margin-top   : 14px;
+  display      : none;
+  line-height  : 1.6;
+}
+
+.checkin-msg-error--show { display: block; }
+
+/* ── Pantalla bienvenida ── */
+.checkin-welcome__icon {
+  width        : 72px;
+  height       : 72px;
+  border-radius: 50%;
+  background   : rgba(201,168,76,0.08);
+  border       : 1.5px solid var(--color-border);
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 32px;
+  margin       : 0 auto 24px;
+  animation    : checkin-pop 0.5s ease both;
+}
+
+@keyframes checkin-pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.checkin-welcome__congreso {
+  font-size     : 10px;
+  font-weight   : 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color         : var(--color-gold);
+  text-align    : center;
+  margin-bottom : 8px;
+}
+
+.checkin-welcome__nombre {
+  font-family  : var(--font-serif);
+  font-size    : 32px;
+  font-weight  : 300;
+  color        : var(--color-white);
+  text-align   : center;
+  line-height  : 1.15;
+  margin-bottom: 6px;
+}
+
+.checkin-welcome__sub {
+  font-size    : 13px;
+  color        : var(--color-muted);
+  text-align   : center;
+  margin-bottom: 28px;
+}
+
+/* ── Grid de info ── */
+.checkin-info-grid {
+  display       : flex;
+  flex-direction: column;
+  gap           : 10px;
+  margin-bottom : 28px;
+}
+
+.checkin-info-row {
+  display      : flex;
+  align-items  : center;
+  gap          : 14px;
+  background   : rgba(255,255,255,0.03);
+  border       : 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-sm);
+  padding      : 14px 18px;
+  transition   : border-color var(--transition-fast);
+}
+
+.checkin-info-row--ok   { border-color: rgba(61,184,122,0.3); background: rgba(61,184,122,0.06); }
+.checkin-info-row--warn { border-color: var(--color-border);  background: rgba(201,168,76,0.05); }
+
+.checkin-info-row__icon {
+  font-size  : 20px;
+  flex-shrink: 0;
+  width      : 32px;
+  text-align : center;
+}
+
+.checkin-info-row__data {
+  display       : flex;
+  flex-direction: column;
+  gap           : 2px;
+  flex          : 1;
+}
+
+.checkin-info-row__label {
+  font-size     : 10px;
+  font-weight   : 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+}
+
+.checkin-info-row__value       { font-size: 16px; font-weight: 500; color: var(--color-white); }
+.checkin-info-row__value--ok   { color: var(--color-success); }
+.checkin-info-row__value--warn { color: var(--color-gold-light); font-size: 13px; font-weight: 300; }
+.checkin-info-row__value--gold { color: var(--color-gold-light); }
+
+/* ── Sello de check-in ── */
+.checkin-stamp {
+  text-align   : center;
+  padding      : 14px;
+  background   : rgba(61,184,122,0.08);
+  border       : 1px solid rgba(61,184,122,0.25);
+  border-radius: var(--radius-sm);
+  font-size    : 12px;
+  color        : var(--color-muted);
+  margin-bottom: 20px;
+}
+
+.checkin-stamp strong {
+  color      : var(--color-success);
+  display    : block;
+  font-size  : 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+/* ── Pantalla ya registrado ── */
+.checkin-ya__icon {
+  width        : 64px;
+  height       : 64px;
+  border-radius: 50%;
+  background   : rgba(201,168,76,0.08);
+  border       : 1.5px solid var(--color-border);
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 28px;
+  margin       : 0 auto 20px;
+}
+
+.checkin-ya__msg {
+  color        : var(--color-muted);
+  font-size    : 13px;
+  text-align   : center;
+  margin-bottom: 24px;
+  line-height  : 1.6;
+}
+
+/* ── Botón secundario ── */
+.checkin-btn-secondary {
+  width        : 100%;
+  background   : transparent;
+  border       : 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding      : 14px;
+  color        : var(--color-muted);
+  font-family  : var(--font-sans);
+  font-size    : 13px;
+  cursor       : pointer;
+  transition   : all var(--transition-fast);
+}
+
+.checkin-btn-secondary:hover {
+  border-color: rgba(255,255,255,0.25);
+  color       : var(--color-white);
+}
+
+/* ── Overlay de carga ── */
+.checkin-overlay {
+  display        : none;
+  position       : fixed;
+  inset          : 0;
+  background     : rgba(6,14,28,0.7);
+  backdrop-filter: blur(4px);
+  z-index        : 200;
+  align-items    : center;
+  justify-content: center;
+}
+
+.checkin-overlay--visible { display: flex; }
+
+.checkin-overlay__spinner {
+  width            : 48px;
+  height           : 48px;
+  border           : 3px solid rgba(201,168,76,0.2);
+  border-top-color : var(--color-gold);
+  border-radius    : 50%;
+  animation        : checkin-spin 0.8s linear infinite;
+}
+
+/* ── Responsive ── */
+@media (max-width: 420px) {
+  .checkin-card           { padding: 28px 20px; }
+  .checkin-welcome__nombre{ font-size: 26px; }
+  .checkin-card__title    { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkin-welcome__icon,
+  .checkin-overlay__spinner,
+  .checkin-spinner-inline { animation: none; }
+  .checkin-brand, .checkin-card { animation: none; opacity: 1; }
+}
