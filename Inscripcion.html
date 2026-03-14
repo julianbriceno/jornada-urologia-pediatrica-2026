@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+    III Jornada Oriental de Urología Pediátrica – Puerto Ordaz
+    Autor  : Julian Briceño
+    Versión: 2.0.0
+  -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Inscripción · III Jornada Oriental de Urología Pediátrica</title>
+  <meta name="description" content="III Jornada UP 2026: inscripción y validación de pago. 17 de octubre, Puerto Ordaz, Estado Bolívar.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://congreso.urologiapediatrica.com.ve/inscripcion">
+  <meta property="og:title"       content="Inscripción · III Jornada Oriental de Urología Pediátrica">
+  <meta property="og:description" content="17 de octubre · Puerto Ordaz · 17 expertos · 8 horas académicas">
+  <meta property="og:image"       content="https://congreso.urologiapediatrica.com.ve/og-image.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="img/logo/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/inscripcion.css">
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegación principal">
+    <div class="nav-logo">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <img src="img/logo/logo.png" alt="Logo" style="width:28px;height:28px;object-fit:contain;">
+      </div>
+      <span class="nav-logo-text">III Jornada Oriental de Urología Pediátrica</span>
+    </div>
+    <div class="nav-right">
+      <span class="nav-date-badge" aria-label="Fecha del evento">17 Oct · Puerto Ordaz</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-template" aria-label="Encabezado">
+    <div class="hero-logo-ring" aria-hidden="true">
+      <img class="hero-logo-img" src="img/logo/logo.png" alt="Logo">
+    </div>
+    <p class="hero-eyebrow">Sociedad Venezolana de Urología Pediátrica</p>
+    <h1 class="hero-title"><em>III</em><br>Jornada Oriental de<br><em>Urología Pediátrica</em></h1>
+    <p class="hero-subtitle"><strong>17 de Octubre del 2026</strong>&nbsp;·&nbsp;Puerto Ordaz, Estado Bolívar</p>
+  </section>
+
+  <div class="section-divider" role="separator"></div>
+
+  <!-- CONTENEDOR DEL FORMULARIO -->
+  <div class="insc-wrapper">
+    <div class="insc-card" id="mainCard">
+
+      <!-- TABS -->
+      <div class="insc-tabs">
+        <div class="insc-tab insc-tab--active" data-tab="nuevo" onclick="switchTab('nuevo')">
+          ✦ Nuevo inscrito
+        </div>
+        <div class="insc-tab" data-tab="retorno" onclick="switchTab('retorno')">
+          ↩ Ya me registré
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           PANEL: NUEVO INSCRITO
+      ══════════════════════════════════ -->
+      <div class="insc-panel insc-panel--active" id="panel-nuevo">
+
+        <!-- Progreso -->
+        <div class="insc-progress">
+          <div class="insc-step insc-step--active" id="ps1">
+            <div class="insc-step__dot">1</div>
+            <span class="insc-step__label">Datos</span>
+          </div>
+          <div class="insc-progress__line" id="pl1"></div>
+          <div class="insc-step" id="ps2">
+            <div class="insc-step__dot">2</div>
+            <span class="insc-step__label">Pago</span>
+          </div>
+          <div class="insc-progress__line" id="pl2"></div>
+          <div class="insc-step" id="ps3">
+            <div class="insc-step__dot">3</div>
+            <span class="insc-step__label">Listo</span>
+          </div>
+        </div>
+
+        <form id="formNuevo" novalidate>
+
+          <!-- DATOS PERSONALES -->
+          <p class="insc-section-title">Datos personales</p>
+          <div class="insc-grid">
+            <div class="insc-field insc-field--full">
+              <label class="insc-label" for="nombre">Nombre completo *</label>
+              <input class="insc-input" type="text" id="nombre" placeholder="Ej: Dr. Juan Pérez García" autocomplete="name">
+              <span class="insc-error" id="err-nombre">Por favor ingresa tu nombre completo.</span>
+            </div>
+            <div class="insc-field">
+              <label class="insc-label" for="cedula">Número de cédula *</label>
+              <input class="insc-input" type="text" id="cedula" placeholder="Ej: 12345678" inputmode="numeric">
+              <span class="insc-error" id="err-cedula">Ingresa un número de cédula válido.</span>
+            </div>
+            <div class="insc-field">
+              <label class="insc-label" for="telefono">Teléfono / WhatsApp *</label>
+              <input class="insc-input" type="tel" id="telefono" placeholder="+58 424 000 0000" autocomplete="tel">
+              <span class="insc-error" id="err-telefono">Ingresa un número de teléfono válido.</span>
+            </div>
+            <div class="insc-field insc-field--full">
+              <label class="insc-label" for="correo">Correo electrónico *</label>
+              <input class="insc-input" type="text" id="correo" placeholder="tu@correo.com" autocomplete="email" inputmode="email">
+              <span class="insc-error" id="err-correo">Ingresa un correo electrónico válido.</span>
+            </div>
+            <div class="insc-field insc-field--full">
+              <label class="insc-label" for="categoria">Categoría de inscripción *</label>
+              <select class="insc-input insc-select" id="categoria">
+                <option value="">— Selecciona tu categoría —</option>
+                <option value="Médico General">Médico General</option>
+                <option value="Médico Especialista">Médico Especialista</option>
+                <option value="Residente / Interno">Residente / Interno</option>
+                <option value="Estudiante de Medicina">Estudiante de Medicina</option>
+                <option value="Otro profesional de salud">Otro profesional de salud</option>
+              </select>
+              <span class="insc-error" id="err-categoria">Selecciona una categoría.</span>
+            </div>
+          </div>
+
+          <!-- PAGO -->
+          <p class="insc-section-title">Información de pago</p>
+          <div class="insc-grid">
+            <div class="insc-field insc-field--full">
+              <label class="insc-label" for="monto">Monto pagado (USD) *</label>
+              <div class="insc-amount">
+                <span class="insc-amount__prefix">$</span>
+                <input class="insc-input" type="text" id="monto" placeholder="Ej: 350" inputmode="numeric">
+              </div>
+              <span class="insc-error" id="err-monto">Ingresa el monto pagado.</span>
+            </div>
+
+            <div class="insc-field insc-field--full">
+              <div class="insc-partial-note" id="partialNote">
+                💳 <strong>Pago parcial:</strong> Si no puedes pagar el valor completo ahora, puedes enviar este comprobante. Podrás regresar con tu cédula para completar el pago más adelante. El acceso se habilitará una vez se confirme el pago total.
+              </div>
+            </div>
+
+            <div class="insc-field insc-field--full">
+              <label class="insc-label">Comprobante de pago *</label>
+              <div class="insc-filedrop" id="fileDrop" onclick="document.getElementById('comprobanteFile').click()">
+                <input type="file" id="comprobanteFile" accept="image/*,.pdf" style="display:none">
+                <span class="insc-filedrop__icon">📎</span>
+                <p class="insc-filedrop__title">Sube tu comprobante</p>
+                <p class="insc-filedrop__hint">JPG, PNG o PDF · Máximo 5 MB</p>
+              </div>
+              <div class="insc-filepreview" id="filePreview">
+                <span>✅</span>
+                <span class="insc-filepreview__name" id="fileName">—</span>
+                <button class="insc-filepreview__remove" onclick="removeFile(event)" title="Eliminar">✕</button>
+              </div>
+              <span class="insc-error" id="err-comprobante">Adjunta el comprobante de pago.</span>
+            </div>
+          </div>
+
+          <!-- TÉRMINOS -->
+          <div class="insc-terms">
+            <input type="checkbox" id="terminos" class="insc-checkbox">
+            <label class="insc-terms__label" for="terminos">
+              Autorizo el uso de mis datos para la gestión de la inscripción a la III Jornada Oriental de Urología Pediátrica 2026 y acepto que el pago será validado por el equipo organizador.
+            </label>
+          </div>
+          <span class="insc-error" id="err-terminos">Debes aceptar los términos para continuar.</span>
+
+          <div class="insc-banner insc-banner--error" id="errorBanner">
+            ⚠️ Ocurrió un error al enviar el formulario. Por favor intenta de nuevo o contacta a los organizadores.
+          </div>
+
+          <button type="submit" class="btn-primary insc-submit" id="btnSubmit">
+            <span class="btn-text">Enviar inscripción →</span>
+            <span class="insc-spinner"></span>
+          </button>
+
+        </form>
+      </div><!-- /panel-nuevo -->
+
+      <!-- ══════════════════════════════════
+           PANEL: RETORNO
+      ══════════════════════════════════ -->
+      <div class="insc-panel" id="panel-retorno">
+
+        <div class="insc-search">
+          <h3 class="sec-title" style="font-size:22px;">Busca tu inscripción</h3>
+          <p style="font-size:13px;color:var(--color-muted);margin-bottom:28px;">Ingresa tu número de cédula para ver tu estado y, si es necesario, complementar tu pago.</p>
+          <div class="insc-search__row">
+            <input class="insc-input" type="text" id="cedulaBuscar" placeholder="Número de cédula" inputmode="numeric">
+            <button class="insc-btn-search" id="btnBuscar" onclick="buscarInscripcion()">Buscar →</button>
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="insc-status" id="statusCard">
+          <div class="insc-status__header">
+            <div class="insc-status__avatar">👤</div>
+            <div class="insc-status__info">
+              <h4 id="statusNombre">—</h4>
+              <p id="statusCodigo">Código: —</p>
+              <div class="insc-badge insc-badge--pendiente" id="statusBadge">⏳ Pendiente</div>
+            </div>
+          </div>
+          <div class="insc-status__detail" id="statusDetail">Cargando información...</div>
+
+          <!-- Complemento de pago -->
+          <div id="complementoPago" style="display:none;">
+            <p class="insc-section-title" id="tituloComplemento" style="margin-top:0;">Subir nuevo comprobante</p>
+            <div class="insc-field" style="margin-bottom:14px;">
+              <label class="insc-label">Monto adicional (USD)</label>
+              <div class="insc-amount">
+                <span class="insc-amount__prefix">$</span>
+                <input class="insc-input" type="text" id="montoAdicional" placeholder="Monto de este pago">
+              </div>
+            </div>
+            <div class="insc-field">
+              <label class="insc-label">Comprobante adicional</label>
+              <div class="insc-filedrop" id="fileDrop2" onclick="document.getElementById('comprobanteAdicional').click()">
+                <input type="file" id="comprobanteAdicional" accept="image/*,.pdf" style="display:none">
+                <span class="insc-filedrop__icon">📎</span>
+                <p class="insc-filedrop__title">Nuevo comprobante</p>
+                <p class="insc-filedrop__hint">JPG, PNG o PDF · Máximo 5 MB</p>
+              </div>
+              <div class="insc-filepreview" id="filePreview2">
+                <span>✅</span>
+                <span class="insc-filepreview__name" id="fileName2">—</span>
+                <button class="insc-filepreview__remove" onclick="removeFile2(event)" title="Eliminar">✕</button>
+              </div>
+            </div>
+            <button class="btn-primary insc-submit" id="btnComplemento" onclick="enviarComplemento()" style="margin-top:16px;">
+              <span class="btn-text">Enviar pago adicional →</span>
+              <span class="insc-spinner"></span>
+            </button>
+          </div>
+        </div><!-- /statusCard -->
+
+        <div class="insc-banner insc-banner--error" id="errorBanner2"></div>
+
+      </div><!-- /panel-retorno -->
+
+      <!-- ══════════════════════════════════
+           PANTALLA DE ÉXITO
+      ══════════════════════════════════ -->
+      <div class="insc-success" id="successScreen">
+        <div class="insc-success__circle">✓</div>
+        <h2 class="sec-title" style="font-size:28px;">¡Gracias por tu <em>pago!</em></h2>
+        <p id="successMsg" style="font-size:14px;color:var(--color-muted);max-width:400px;margin:0 auto 28px;line-height:1.7;">
+          Tu comprobante fue recibido. El equipo del congreso lo validará y te contactará.
+        </p>
+
+        <div class="insc-codebox">
+          <small>Tu código de inscripción</small>
+          <span id="successCode">—</span>
+        </div>
+
+        <div class="insc-success__steps">
+          <div class="insc-success__step"><span>📬</span><span>Recibirás un correo de confirmación en los próximos minutos.</span></div>
+          <div class="insc-success__step"><span>⏱️</span><span>El pago será revisado en un plazo máximo de <strong>48 horas hábiles</strong>.</span></div>
+          <div class="insc-success__step"><span>📲</span><span>Te notificaremos a tu correo y WhatsApp cuando el acceso esté habilitado.</span></div>
+          <div class="insc-success__step"><span>🔖</span><span>Guarda tu código de inscripción. Lo necesitarás para acceder al contenido.</span></div>
+        </div>
+      </div>
+
+      <!-- FOOTER CARD -->
+      <div class="insc-footer">
+        🔒 Tus datos están protegidos · Solo se usan para gestionar tu inscripción
+      </div>
+
+    </div><!-- /insc-card -->
+  </div><!-- /insc-wrapper -->
+
+  <script src="scripts/inscripcion.js" defer></script>
+</body>
+</html>

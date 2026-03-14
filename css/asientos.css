@@ -1,0 +1,423 @@
+/* ============================================================
+   asientos.css — página de selección de asiento
+   Depende de styles.css para variables, reset y .btn-primary.
+   ============================================================ */
+
+/* ── Colores semánticos de la sala ── */
+:root {
+  --seat-libre       : #2d7a4f;
+  --seat-libre-bg    : rgba(45,122,79,0.12);
+  --seat-libre-border: rgba(45,122,79,0.4);
+  --seat-ocupado-bg  : rgba(224,92,92,0.1);
+  --seat-ocupado-bdr : rgba(224,92,92,0.35);
+}
+
+/* ── Header ── */
+.seat-header {
+  position        : fixed;
+  top             : 0; left: 0; right: 0;
+  z-index         : 200;
+  padding         : 14px var(--section-padding-x);
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  gap             : 16px;
+  flex-wrap       : wrap;
+  background      : rgba(6,14,28,0.95);
+  backdrop-filter : blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom   : 1px solid var(--color-border);
+}
+
+.seat-header__brand {
+  display    : flex;
+  align-items: center;
+  gap        : 14px;
+}
+
+.seat-header__title {
+  font-family   : var(--font-serif);
+  font-size     : 15px;
+  font-style    : italic;
+  color         : var(--color-gold);
+  letter-spacing: 0.04em;
+  line-height   : 1.3;
+}
+
+.seat-header__sub {
+  font-size: 12px;
+  color    : var(--color-muted);
+  margin-top: 2px;
+}
+
+/* ── Badge de usuario ── */
+.seat-user-badge {
+  display      : flex;
+  align-items  : center;
+  gap          : 10px;
+  background   : rgba(201,168,76,0.07);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding      : 8px 18px;
+}
+
+.seat-user-badge__avatar {
+  width        : 32px;
+  height       : 32px;
+  background   : linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  border-radius: 50%;
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-weight  : 600;
+  font-size    : 13px;
+  color        : var(--color-bg-darkest);
+  flex-shrink  : 0;
+}
+
+.seat-user-badge__info {
+  display       : flex;
+  flex-direction: column;
+  line-height   : 1.3;
+}
+
+.seat-user-badge__name   { color: var(--color-white);  font-size: 14px; font-weight: 500; }
+.seat-user-badge__cedula { color: var(--color-muted);  font-size: 12px; }
+
+/* ── Main ── */
+.seat-main {
+  min-height : 100vh;
+  padding    : 100px 24px 120px;
+  max-width  : 960px;
+  margin     : 0 auto;
+  width      : 100%;
+}
+
+/* ── Acceso denegado ── */
+.seat-login {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  justify-content: center;
+  min-height     : 60vh;
+  text-align     : center;
+  gap            : 16px;
+}
+
+.seat-login__icon { font-size: 52px; }
+.seat-login__msg  { color: var(--color-muted); max-width: 380px; line-height: 1.7; font-size: 14px; }
+
+/* ── Toast de estado ── */
+.seat-toast {
+  display      : none;
+  position     : fixed;
+  bottom       : 100px;
+  left         : 50%;
+  transform    : translateX(-50%) translateY(20px);
+  min-width    : 280px;
+  max-width    : calc(100vw - 32px);
+  padding      : 14px 24px;
+  border-radius: var(--radius-pill);
+  font-size    : 14px;
+  font-weight  : 500;
+  text-align   : center;
+  z-index      : 500;
+  box-shadow   : 0 8px 32px rgba(0,0,0,0.4);
+  opacity      : 0;
+  transition   : opacity var(--transition-fast), transform var(--transition-fast);
+  pointer-events: none;
+}
+
+.seat-toast--visible  { opacity: 1 !important; transform: translateX(-50%) translateY(0) !important; }
+.seat-toast--success  { background: var(--color-success); color: #fff; }
+.seat-toast--error    { background: var(--color-error);   color: #fff; }
+.seat-toast--loading  { background: var(--color-gold);    color: var(--color-bg-darkest); }
+
+/* ── Asiento actual ── */
+.seat-current {
+  display      : flex;
+  align-items  : center;
+  gap          : 14px;
+  background   : rgba(201,168,76,0.07);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding      : 18px 24px;
+  margin-bottom: 28px;
+}
+
+.seat-current__icon  { font-size: 28px; }
+.seat-current__body  { display: flex; flex-direction: column; gap: 3px; }
+.seat-current__label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-muted); }
+.seat-current__value { font-family: var(--font-serif); font-size: 20px; color: var(--color-gold); }
+
+/* ── Leyenda ── */
+.seat-legend {
+  display      : flex;
+  gap          : 24px;
+  flex-wrap    : wrap;
+  margin-bottom: 28px;
+}
+
+.seat-legend__item {
+  display    : flex;
+  align-items: center;
+  gap        : 8px;
+  font-size  : 13px;
+  color      : var(--color-muted);
+}
+
+.seat-legend__dot {
+  width        : 16px;
+  height       : 16px;
+  border-radius: var(--radius-sm);
+  flex-shrink  : 0;
+}
+
+.seat-legend__dot--libre   { background: var(--seat-libre-bg);   border: 2px solid var(--seat-libre-border); }
+.seat-legend__dot--ocupado { background: var(--seat-ocupado-bg); border: 2px solid var(--seat-ocupado-bdr);  }
+.seat-legend__dot--mio     { background: var(--color-gold); }
+
+/* ── Escenario ── */
+.seat-stage {
+  background    : var(--color-bg-lighter);
+  border        : 1px solid var(--color-border);
+  color         : var(--color-gold);
+  text-align    : center;
+  padding       : 12px;
+  border-radius : var(--radius-md) var(--radius-md) 0 0;
+  font-family   : var(--font-serif);
+  font-size     : 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom : 4px;
+}
+
+/* ── Sala ── */
+.seat-sala {
+  background   : var(--color-bg-mid);
+  border       : 1px solid var(--color-border);
+  border-top   : none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding      : 28px 20px;
+  margin-bottom: 32px;
+}
+
+/* ── Mesón ── */
+.seat-meson-wrap  { margin-bottom: 18px; }
+
+.seat-meson-label {
+  font-size     : 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color         : var(--color-muted);
+  margin-bottom : 8px;
+  padding-left  : 4px;
+  display       : flex;
+  align-items   : center;
+  gap           : 8px;
+}
+
+.seat-meson-label__tag {
+  background    : var(--color-bg-lighter);
+  color         : var(--color-gold);
+  border        : 1px solid var(--color-border);
+  font-size     : 9px;
+  font-weight   : 500;
+  letter-spacing: 0.1em;
+  padding       : 2px 8px;
+  border-radius : var(--radius-pill);
+  text-transform: uppercase;
+}
+
+.seat-meson {
+  display        : flex;
+  gap            : 8px;
+  align-items    : center;
+  justify-content: center;
+  background     : var(--color-bg-dark);
+  border         : 1px solid var(--color-border);
+  border-radius  : var(--radius-md);
+  padding        : 12px 16px;
+}
+
+.seat-meson--ponentes {
+  opacity   : 0.5;
+  cursor    : not-allowed;
+  border-style: dashed;
+}
+
+/* ── Silla ── */
+.seat-silla {
+  width        : 46px;
+  height       : 46px;
+  border-radius: var(--radius-sm);
+  border       : 2px solid transparent;
+  display      : flex;
+  flex-direction: column;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 11px;
+  font-weight  : 600;
+  cursor       : pointer;
+  transition   : transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+  position     : relative;
+  flex-shrink  : 0;
+}
+
+.seat-silla__num { font-size: 13px; font-weight: 700; line-height: 1; }
+.seat-silla__sub { font-size: 9px;  font-weight: 400; opacity: 0.7; margin-top: 1px; }
+
+/* Estados */
+.seat-silla--libre {
+  background  : var(--seat-libre-bg);
+  border-color: var(--seat-libre-border);
+  color       : #4ade80;
+}
+
+.seat-silla--libre:hover {
+  background  : var(--seat-libre);
+  border-color: var(--seat-libre);
+  color       : #fff;
+  transform   : translateY(-3px);
+  box-shadow  : 0 6px 16px rgba(45,122,79,0.3);
+}
+
+.seat-silla--ocupado {
+  background  : var(--seat-ocupado-bg);
+  border-color: var(--seat-ocupado-bdr);
+  color       : var(--color-error);
+  cursor      : default;
+}
+
+.seat-silla--mio {
+  background  : linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  border-color: var(--color-gold);
+  color       : var(--color-bg-darkest);
+  cursor      : pointer;
+}
+
+.seat-silla--mio:hover {
+  transform : translateY(-3px);
+  box-shadow: 0 6px 16px rgba(201,168,76,0.4);
+}
+
+.seat-silla--seleccionado {
+  background  : var(--color-teal);
+  border-color: var(--color-teal-light);
+  color       : #fff;
+  transform   : translateY(-3px);
+  box-shadow  : 0 6px 16px rgba(26,127,122,0.4);
+}
+
+/* ── Tooltip ── */
+.seat-tooltip {
+  display      : none;
+  position     : absolute;
+  bottom       : calc(100% + 8px);
+  left         : 50%;
+  transform    : translateX(-50%);
+  background   : var(--color-bg-lighter);
+  border       : 1px solid var(--color-border);
+  color        : var(--color-white);
+  font-size    : 11px;
+  font-weight  : 400;
+  padding      : 6px 10px;
+  border-radius: var(--radius-sm);
+  white-space  : normal;
+  z-index      : 100;
+  pointer-events: none;
+  max-width    : 160px;
+  text-align   : center;
+}
+
+.seat-tooltip::after {
+  content      : '';
+  position     : absolute;
+  top          : 100%;
+  left         : 50%;
+  transform    : translateX(-50%);
+  border       : 5px solid transparent;
+  border-top-color: var(--color-bg-lighter);
+}
+
+.seat-silla:hover .seat-tooltip { display: block; }
+
+/* ── Panel de confirmación ── */
+.seat-confirm-panel {
+  display      : none;
+  position     : fixed;
+  bottom       : 0; left: 0; right: 0;
+  background   : var(--color-bg-dark);
+  border-top   : 1px solid var(--color-border);
+  padding      : 20px var(--section-padding-x);
+  box-shadow   : 0 -8px 40px rgba(6,14,28,0.6);
+  z-index      : 200;
+  align-items  : center;
+  justify-content: space-between;
+  gap          : 16px;
+  flex-wrap    : wrap;
+}
+
+.seat-confirm-panel--visible { display: flex; }
+
+.seat-confirm-panel__info { line-height: 1.4; }
+.seat-confirm-panel__pre  { display: block; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 4px; }
+.seat-confirm-panel__sel  { font-family: var(--font-serif); font-size: 22px; color: var(--color-gold); }
+
+.seat-confirm-panel__btn  { white-space: nowrap; }
+.seat-confirm-panel__btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+/* ── Overlay de carga ── */
+.seat-overlay {
+  display         : none;
+  position        : fixed;
+  inset           : 0;
+  background      : rgba(6,14,28,0.7);
+  backdrop-filter : blur(4px);
+  z-index         : 300;
+  align-items     : center;
+  justify-content : center;
+}
+
+.seat-overlay--visible { display: flex; }
+
+.seat-overlay__spinner {
+  width            : 48px;
+  height           : 48px;
+  border           : 3px solid rgba(201,168,76,0.2);
+  border-top-color : var(--color-gold);
+  border-radius    : 50%;
+  animation        : seat-spin 0.8s linear infinite;
+}
+
+@keyframes seat-spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .seat-header   { padding: 12px var(--section-padding-x); }
+  .seat-header__title { font-size: 13px; }
+}
+
+@media (max-width: 640px) {
+  .seat-main     { padding: 90px 10px 120px; }
+  .seat-sala     { padding: 14px 6px; }
+  .seat-meson    { gap: 3px; padding: 8px 4px; }
+
+  .seat-silla {
+    width     : clamp(26px, calc((100vw - 60px) / 10), 38px);
+    height    : clamp(26px, calc((100vw - 60px) / 10), 38px);
+    border-radius: 6px;
+    border-width : 1.5px;
+  }
+
+  .seat-silla__num { font-size: 10px; }
+  .seat-silla__sub { display: none; }
+
+  .seat-confirm-panel { padding: 14px 16px; }
+  .seat-confirm-panel__sel { font-size: 18px; }
+  .seat-user-badge { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seat-silla, .seat-toast, .seat-overlay__spinner { transition: none; animation: none; }
+}

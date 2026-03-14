@@ -1,0 +1,532 @@
+/* ============================================================
+   inscripcion.css — estilos propios de la página de inscripción
+   Depende de styles.css para variables, nav, hero y utilidades.
+   ============================================================ */
+
+/* ── Wrapper ── */
+.insc-wrapper {
+  position       : relative;
+  z-index        : 1;
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  padding        : 40px 16px 80px;
+}
+
+/* ── Card principal ── */
+.insc-card {
+  width        : 100%;
+  max-width    : 620px;
+  background   : var(--color-bg-mid);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow     : hidden;
+  box-shadow   : 0 24px 80px rgba(6,14,28,0.5);
+  animation    : anim-fade-up 0.7s 0.3s ease both;
+}
+
+/* ── Tabs ── */
+.insc-tabs {
+  display              : grid;
+  grid-template-columns: 1fr 1fr;
+  background           : var(--color-bg-lighter);
+}
+
+.insc-tab {
+  padding       : 18px;
+  text-align    : center;
+  font-size     : 13px;
+  font-weight   : 500;
+  letter-spacing: 0.05em;
+  color         : var(--color-muted);
+  cursor        : pointer;
+  border-bottom : 3px solid transparent;
+  transition    : all var(--transition-fast);
+  user-select   : none;
+}
+
+.insc-tab--active {
+  background   : var(--color-bg-mid);
+  color        : var(--color-white);
+  border-bottom-color: var(--color-teal);
+}
+
+.insc-tab:hover:not(.insc-tab--active) {
+  color     : var(--color-white);
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Panels ── */
+.insc-panel          { display: none; padding: 40px; }
+.insc-panel--active  { display: block; }
+
+/* ── Pasos de progreso ── */
+.insc-progress {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  gap            : 0;
+  margin-bottom  : 28px;
+}
+
+.insc-step {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  gap            : 6px;
+}
+
+.insc-step__dot {
+  width        : 28px;
+  height       : 28px;
+  border-radius: 50%;
+  border       : 2px solid var(--color-border);
+  background   : var(--color-bg-dark);
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 12px;
+  font-weight  : 500;
+  color        : var(--color-muted);
+  transition   : all var(--transition-med);
+}
+
+.insc-step__label {
+  font-size     : 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+  white-space   : nowrap;
+}
+
+.insc-step--active .insc-step__dot  { border-color: var(--color-teal); color: var(--color-teal-light); background: rgba(26,127,122,0.1); }
+.insc-step--active .insc-step__label{ color: var(--color-teal-light); }
+.insc-step--done   .insc-step__dot  { border-color: var(--color-success); background: var(--color-success); color: #fff; }
+.insc-step--done   .insc-step__label{ color: var(--color-success); }
+
+.insc-progress__line {
+  flex        : 1;
+  height      : 1.5px;
+  background  : var(--color-border);
+  margin      : 0 8px 20px;
+  min-width   : 32px;
+  max-width   : 80px;
+  transition  : background var(--transition-med);
+}
+
+.insc-progress__line--done { background: var(--color-success); }
+
+/* ── Títulos de sección del form ── */
+.insc-section-title {
+  font-size     : 11px;
+  font-weight   : 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color         : var(--color-teal-light);
+  margin        : 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom : 1px solid var(--color-border);
+}
+
+.insc-section-title:first-child { margin-top: 0; }
+
+/* ── Grid del formulario ── */
+.insc-grid {
+  display              : grid;
+  grid-template-columns: 1fr 1fr;
+  gap                  : 16px;
+}
+
+.insc-field         { display: flex; flex-direction: column; gap: 6px; }
+.insc-field--full   { grid-column: 1 / -1; }
+
+/* ── Labels ── */
+.insc-label {
+  font-size     : 11px;
+  font-weight   : 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+}
+
+/* ── Inputs ── */
+.insc-input {
+  background   : var(--color-bg-light);
+  border       : 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding      : 13px 16px;
+  font-size    : 14px;
+  font-family  : var(--font-sans);
+  font-weight  : 300;
+  color        : var(--color-white);
+  outline      : none;
+  transition   : all var(--transition-fast);
+  width        : 100%;
+}
+
+.insc-input::placeholder { color: rgba(138,154,181,0.45); }
+
+.insc-input:focus {
+  border-color: var(--color-teal-light);
+  background  : var(--color-bg-lighter);
+  box-shadow  : 0 0 0 4px rgba(26,127,122,0.15);
+}
+
+.insc-input--error       { border-color: var(--color-error); }
+.insc-input--error:focus { box-shadow: 0 0 0 4px rgba(224,92,92,0.15); }
+
+/* ── Select ── */
+.insc-select {
+  appearance            : none;
+  background-image      : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9ab5' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat     : no-repeat;
+  background-position   : right 14px center;
+  cursor                : pointer;
+}
+
+.insc-select option { background: var(--color-bg-mid); color: var(--color-white); }
+
+/* ── Monto con prefijo ── */
+.insc-amount         { position: relative; }
+.insc-amount__prefix {
+  position      : absolute;
+  left          : 14px;
+  top           : 50%;
+  transform     : translateY(-50%);
+  font-size     : 14px;
+  color         : var(--color-muted);
+  pointer-events: none;
+  z-index       : 1;
+}
+.insc-amount .insc-input { padding-left: 30px; }
+
+/* ── Nota pago parcial ── */
+.insc-partial-note {
+  background   : rgba(201,168,76,0.08);
+  border       : 1px solid rgba(201,168,76,0.25);
+  border-radius: var(--radius-sm);
+  padding      : 14px 16px;
+  font-size    : 13px;
+  color        : var(--color-gold-light);
+  line-height  : 1.6;
+  display      : none;
+}
+
+.insc-partial-note--show { display: block; }
+
+/* ── File drop ── */
+.insc-filedrop {
+  border       : 2px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding      : 32px 20px;
+  text-align   : center;
+  cursor       : pointer;
+  transition   : all var(--transition-fast);
+  background   : var(--color-bg-dark);
+}
+
+.insc-filedrop:hover,
+.insc-filedrop--dragover {
+  border-color: var(--color-teal-light);
+  background  : rgba(26,127,122,0.06);
+}
+
+.insc-filedrop__icon  { font-size: 32px; display: block; margin-bottom: 10px; }
+.insc-filedrop__title { font-size: 14px; font-weight: 500; color: var(--color-white); margin-bottom: 4px; }
+.insc-filedrop__hint  { font-size: 12px; color: var(--color-muted); }
+
+/* ── File preview ── */
+.insc-filepreview {
+  display      : none;
+  align-items  : center;
+  gap          : 12px;
+  background   : rgba(61,184,122,0.08);
+  border       : 1px solid rgba(61,184,122,0.3);
+  border-radius: var(--radius-sm);
+  padding      : 14px 16px;
+  margin-top   : 10px;
+  font-size    : 13px;
+}
+
+.insc-filepreview--show { display: flex; }
+
+.insc-filepreview__name   { flex: 1; color: var(--color-success); font-weight: 500; }
+.insc-filepreview__remove {
+  cursor       : pointer;
+  color        : var(--color-muted);
+  font-size    : 16px;
+  background   : none;
+  border       : none;
+  padding      : 2px 6px;
+  border-radius: var(--radius-sm);
+  transition   : all var(--transition-fast);
+  line-height  : 1;
+}
+.insc-filepreview__remove:hover { background: rgba(224,92,92,0.15); color: var(--color-error); }
+
+/* ── Mensajes de error de campo ── */
+.insc-error        { font-size: 11px; color: var(--color-error); display: none; }
+.insc-error--show  { display: block; }
+
+/* ── Términos ── */
+.insc-terms {
+  display    : flex;
+  align-items: flex-start;
+  gap        : 10px;
+  margin-top : 20px;
+}
+
+.insc-checkbox {
+  width        : 18px;
+  height       : 18px;
+  flex-shrink  : 0;
+  accent-color : var(--color-teal);
+  margin-top   : 2px;
+  cursor       : pointer;
+}
+
+.insc-terms__label {
+  font-size  : 12px;
+  color      : var(--color-muted);
+  line-height: 1.6;
+  cursor     : pointer;
+}
+
+/* ── Banner global de error / éxito ── */
+.insc-banner {
+  display      : none;
+  border-radius: var(--radius-sm);
+  padding      : 14px 16px;
+  font-size    : 13px;
+  margin-top   : 16px;
+  line-height  : 1.5;
+}
+
+.insc-banner--show  { display: block; }
+
+.insc-banner--error {
+  background: rgba(224,92,92,0.1);
+  border    : 1px solid rgba(224,92,92,0.3);
+  color     : #f87171;
+}
+
+/* ── Botón submit (extiende .btn-primary) ── */
+.insc-submit {
+  width        : 100%;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  margin-top   : 24px;
+  position     : relative;
+}
+
+.insc-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+.insc-submit.loading .btn-text { opacity: 0.7; }
+
+/* ── Spinner ── */
+.insc-spinner {
+  display      : none;
+  width        : 18px;
+  height       : 18px;
+  border       : 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation    : insc-spin 0.7s linear infinite;
+  position     : absolute;
+  right        : 20px;
+  top          : 50%;
+  transform    : translateY(-50%);
+}
+
+.insc-submit.loading .insc-spinner { display: block; }
+
+@keyframes insc-spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ── Botón de búsqueda ── */
+.insc-search        { text-align: center; padding: 16px 0 8px; }
+.insc-search__row   { display: flex; gap: 10px; }
+.insc-search__row .insc-input { flex: 1; }
+
+.insc-btn-search {
+  padding      : 13px 22px;
+  background   : var(--color-teal);
+  border       : none;
+  border-radius: var(--radius-sm);
+  color        : #fff;
+  font-family  : var(--font-sans);
+  font-size    : 13px;
+  font-weight  : 500;
+  cursor       : pointer;
+  transition   : background var(--transition-fast), transform var(--transition-fast);
+  white-space  : nowrap;
+}
+
+.insc-btn-search:hover    { background: var(--color-teal-light); transform: translateY(-1px); }
+.insc-btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Status card (resultado de búsqueda) ── */
+.insc-status {
+  display      : none;
+  background   : var(--color-bg-dark);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding      : 28px;
+  margin-top   : 24px;
+}
+
+.insc-status--visible { display: block; }
+
+.insc-status__header {
+  display      : flex;
+  align-items  : flex-start;
+  gap          : 14px;
+  margin-bottom: 20px;
+}
+
+.insc-status__avatar {
+  width        : 48px;
+  height       : 48px;
+  background   : linear-gradient(135deg, var(--color-bg-mid), var(--color-bg-lighter));
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 22px;
+  flex-shrink  : 0;
+}
+
+.insc-status__info h4 { font-size: 16px; font-weight: 500; color: var(--color-white); margin-bottom: 4px; font-family: var(--font-serif); }
+.insc-status__info p  { font-size: 12px; color: var(--color-muted); }
+
+.insc-status__detail {
+  background   : var(--color-bg-mid);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding      : 16px;
+  font-size    : 13px;
+  color        : var(--color-muted);
+  line-height  : 1.7;
+  margin-bottom: 16px;
+}
+
+.insc-status__detail strong { color: var(--color-white); font-weight: 400; }
+
+/* ── Badges de estado ── */
+.insc-badge {
+  display      : inline-flex;
+  align-items  : center;
+  gap          : 6px;
+  padding      : 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size    : 12px;
+  font-weight  : 500;
+  margin-top   : 8px;
+}
+
+.insc-badge--pendiente { background: rgba(201,168,76,0.1);  color: var(--color-gold);       border: 1px solid rgba(201,168,76,0.3);  }
+.insc-badge--parcial   { background: rgba(96,165,250,0.1);  color: #60a5fa;                 border: 1px solid rgba(96,165,250,0.3);  }
+.insc-badge--validado  { background: rgba(61,184,122,0.1);  color: var(--color-success);    border: 1px solid rgba(61,184,122,0.3);  }
+.insc-badge--rechazado { background: rgba(224,92,92,0.1);   color: var(--color-error);      border: 1px solid rgba(224,92,92,0.3);   }
+
+/* ── Pantalla de éxito ── */
+.insc-success {
+  display   : none;
+  padding   : 60px 40px;
+  text-align: center;
+}
+
+.insc-success--show { display: block; }
+
+.insc-success__circle {
+  width        : 80px;
+  height       : 80px;
+  background   : rgba(61,184,122,0.12);
+  border       : 2px solid rgba(61,184,122,0.4);
+  border-radius: 50%;
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 36px;
+  margin       : 0 auto 28px;
+  color        : var(--color-success);
+  animation    : insc-pop 0.5s ease both;
+}
+
+@keyframes insc-pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.insc-success__steps {
+  background   : var(--color-bg-dark);
+  border       : 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding      : 20px 24px;
+  text-align   : left;
+  max-width    : 380px;
+  margin       : 0 auto;
+}
+
+.insc-success__step {
+  display      : flex;
+  gap          : 10px;
+  align-items  : flex-start;
+  font-size    : 13px;
+  color        : var(--color-muted);
+  margin-bottom: 10px;
+  line-height  : 1.5;
+}
+
+.insc-success__step:last-child { margin-bottom: 0; }
+.insc-success__step strong     { color: var(--color-white); font-weight: 400; }
+
+/* ── Caja de código ── */
+.insc-codebox {
+  display      : inline-block;
+  background   : rgba(61,184,122,0.06);
+  border       : 1.5px solid rgba(61,184,122,0.3);
+  border-radius: var(--radius-md);
+  padding      : 18px 36px;
+  margin-bottom: 24px;
+}
+
+.insc-codebox small {
+  display       : block;
+  font-size     : 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+  margin-bottom : 6px;
+}
+
+.insc-codebox span {
+  font-family   : var(--font-serif);
+  font-size     : 26px;
+  color         : var(--color-success);
+  letter-spacing: 0.12em;
+}
+
+/* ── Footer de card ── */
+.insc-footer {
+  padding     : 16px 40px;
+  background  : var(--color-bg-darker, var(--color-bg-dark));
+  border-top  : 1px solid var(--color-border);
+  font-size   : 11px;
+  color       : var(--color-muted);
+  text-align  : center;
+  letter-spacing: 0.03em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  .insc-panel         { padding: 28px 20px; }
+  .insc-success       { padding: 40px 20px; }
+  .insc-grid          { grid-template-columns: 1fr; }
+  .insc-field--full   { grid-column: 1; }
+  .insc-search__row   { flex-direction: column; }
+  .insc-footer        { padding: 14px 20px; }
+  .insc-btn-search    { width: 100%; }
+}

@@ -75,7 +75,7 @@ const CONFIG = {
         inscripcion: {
           titulo: '📋 Inscripciones',
           texto : 'Cupos limitados. El pago se confirma mediante comprobante de transferencia o depósito bancario. Respuesta en menos de 48 h hábiles.',
-          url   : '#',
+          url   : 'inscripcion.html',
           boton : 'Inscríbete ahora →',
         },
       },

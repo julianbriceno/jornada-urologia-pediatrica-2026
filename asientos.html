@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+    III Jornada Oriental de Urología Pediátrica – Selección de asiento
+    Autor  : Julian Briceño
+    Versión: 2.0.0
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selección de Asiento · III Jornada Oriental de Urología Pediátrica</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="img/logo/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/asientos.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="seat-header" id="mainNav">
+    <div class="seat-header__brand">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <img src="img/logo/logo.png" alt="Logo" style="width:28px;height:28px;object-fit:contain;">
+      </div>
+      <div>
+        <p class="seat-header__title">III Jornada Oriental de Urología Pediátrica</p>
+        <p class="seat-header__sub">Selección de asiento</p>
+      </div>
+    </div>
+
+    <div class="seat-user-badge" id="user-badge" style="display:none" aria-label="Usuario autenticado">
+      <div class="seat-user-badge__avatar" id="avatar-initials">?</div>
+      <div class="seat-user-badge__info">
+        <span class="seat-user-badge__name"   id="badge-nombre">—</span>
+        <span class="seat-user-badge__cedula" id="badge-cedula">—</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="seat-main">
+
+    <!-- Acceso denegado -->
+    <div class="seat-login" id="login-screen" style="display:none" role="alert">
+      <span class="seat-login__icon" aria-hidden="true">🔒</span>
+      <h2 class="sec-title" style="font-size:28px;">Acceso no válido</h2>
+      <p id="login-msg" class="seat-login__msg">
+        El enlace de acceso no es válido o ha expirado. Por favor revisa tu correo o consulta en la recepción.
+      </p>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="contenido" style="display:none">
+
+      <!-- Toast de estado -->
+      <div class="seat-toast" id="estado" role="status" aria-live="polite"></div>
+
+      <!-- Asiento actual -->
+      <div class="seat-current" id="asiento-actual" style="display:none" aria-label="Tu asiento actual">
+        <span class="seat-current__icon" aria-hidden="true">🪑</span>
+        <div class="seat-current__body">
+          <span class="seat-current__label">Tu asiento actual</span>
+          <span class="seat-current__value" id="asiento-actual-valor">—</span>
+        </div>
+      </div>
+
+      <!-- Leyenda -->
+      <div class="seat-legend" role="list" aria-label="Leyenda de estados">
+        <div class="seat-legend__item" role="listitem">
+          <span class="seat-legend__dot seat-legend__dot--libre"   aria-hidden="true"></span> Disponible
+        </div>
+        <div class="seat-legend__item" role="listitem">
+          <span class="seat-legend__dot seat-legend__dot--ocupado" aria-hidden="true"></span> Ocupado
+        </div>
+        <div class="seat-legend__item" role="listitem">
+          <span class="seat-legend__dot seat-legend__dot--mio"     aria-hidden="true"></span> Tu asiento
+        </div>
+      </div>
+
+      <!-- Escenario -->
+      <div class="seat-stage" aria-hidden="true">🎭 Escenario / Pantalla</div>
+
+      <!-- Sala — generada por JS -->
+      <div class="seat-sala" id="sala" role="grid" aria-label="Mapa de asientos"></div>
+
+    </div>
+  </main>
+
+  <!-- Panel de confirmación -->
+  <div class="seat-confirm-panel" id="panel-confirmar" role="dialog" aria-label="Confirmar asiento seleccionado">
+    <div class="seat-confirm-panel__info">
+      <span class="seat-confirm-panel__pre">Asiento seleccionado</span>
+      <span class="seat-confirm-panel__sel" id="sel-label">—</span>
+    </div>
+    <button class="btn-primary seat-confirm-panel__btn" id="btn-confirmar" onclick="confirmarAsiento()">
+      Confirmar asiento →
+    </button>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="seat-overlay" id="overlay" aria-hidden="true">
+    <div class="seat-overlay__spinner"></div>
+  </div>
+
+  <script src="scripts/asientos.js" defer></script>
+</body>
+</html>
