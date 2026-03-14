@@ -52,10 +52,12 @@ async function hacerCheckin() {
     }
 
     if (data.yaRegistrado) {
-      document.getElementById('ya-nombre').textContent = data.nombre;
-      document.getElementById('ya-hora').textContent   = data.horaAnterior;
-      mostrarScreen('screen-ya');
-      return;
+        document.getElementById('ya-nombre').textContent = data.nombre;
+        document.getElementById('ya-hora').textContent   = data.horaAnterior;
+        document.getElementById('w-cedula').textContent    = data.cedula;
+        document.getElementById('w-categoria').textContent = data.categoria || '—';
+        mostrarScreen('screen-ya');
+        return;
     }
 
     // Éxito
