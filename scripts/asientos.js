@@ -1,8 +1,7 @@
 // ════════════════════════════════════════════════════════
 //  CONFIGURACIÓN
 // ════════════════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/TU_URL_AQUI/exec';
-
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxO7AfJTNerfuYpkYXsAup0w5_MCA9A1j81vrwYmJ02yq66Uu3ttY9GCcomWJUo2BRL/exec';
 const MESONES = 8;
 const SILLAS  = 10;
 
