@@ -313,7 +313,7 @@ function mostrarEstado(data) {
   if (btnExistente) btnExistente.remove();
 
   if (data.estado === 'VALIDADO') {
-    const linkAsiento = 'asientos.html?action=asientos&cedula=' + data.cedula + '&codigo=' + data.codigo;
+    const linkAsiento = '/asientos/index.html?action=asientos&cedula=' + data.cedula + '&codigo=' + data.codigo;
     const div = document.createElement('div');
     div.id = 'btnSeleccionarAsiento';
     div.style.cssText = 'margin-top:16px;text-align:center;';
